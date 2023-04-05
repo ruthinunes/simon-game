@@ -1,0 +1,85 @@
+*,
+::after,
+::before {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    padding: 0;
+}
+
+body {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.game {
+    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.block {
+    width: 200px;
+    height: 200px;
+    background-color: #000;
+    display: inline-block;
+}
+
+.block-yellow,
+.block-red {
+    opacity: .3;
+    border-bottom-left-radius: 30%;
+    border-top-left-radius: 30%;
+    background-color: #000;
+}
+
+.block-blue,
+.block-green {
+    opacity: .3;
+    border-bottom-right-radius: 30%;
+    border-top-right-radius: 30%;
+}
+
+.block-yellow {
+    background-color: rgb(252, 237, 93);
+}
+
+.block-green {
+    background-color: rgb(41, 235, 38);
+}
+
+.block-blue {
+    background-color: rgb(38, 126, 235);
+}
+
+.block-red {
+    background-color: rgb(235, 74, 38);
+}
+
+.buttons {
+
+    margin-top: 50px;
+}
+
+.start,
+.reset {
+    margin: 10px;
+    width: 150px;
+    height: 70px;
+    border-radius: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.start:hover {
+    background-color: greenyellow;
+}
+
+.reset:hover {
+    background-color: red;
+}
