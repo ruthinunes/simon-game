@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital@0;1&display=swap');
+
 *,
 ::after,
 ::before {
@@ -9,39 +11,31 @@
 }
 
 body {
+    font-family: 'Nunito', sans-serif;
     flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 100vw;
 }
 
 .game {
-    gap: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 100%;
+    height: 300px;
+    width: 300px;
+    gap: 5px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
 .block {
-    width: 200px;
-    height: 200px;
-    background-color: #000;
+    opacity: .3;
+    cursor: pointer;
     display: inline-block;
-}
-
-.block-yellow,
-.block-red {
-    opacity: .3;
-    border-bottom-left-radius: 30%;
-    border-top-left-radius: 30%;
-    background-color: #000;
-}
-
-.block-blue,
-.block-green {
-    opacity: .3;
-    border-bottom-right-radius: 30%;
-    border-top-right-radius: 30%;
 }
 
 .block-yellow {
@@ -60,14 +54,32 @@ body {
     background-color: rgb(235, 74, 38);
 }
 
-.buttons {
-
-    margin-top: 50px;
+.status{
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    gap:10px;
+    top: 50%;
+    position: absolute;
+    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.start,
-.reset {
-    margin: 10px;
+.score{
+    font-size: 20px;
+    display: flex;
+    gap: 10px;
+    margin: 30px 0 ;
+}
+
+.start {
     width: 150px;
     height: 70px;
     border-radius: 30px;
@@ -82,4 +94,12 @@ body {
 
 .reset:hover {
     background-color: red;
+}
+
+@media screen and (min-width: 500px) {
+    .game {
+        gap: 10px;
+        width: 350px;
+        height: 350px;
+    }
 }
