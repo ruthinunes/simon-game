@@ -1,7 +1,7 @@
 # Simon Game
 This repository contains a simple implementation of the classic Simon game, developed as an exercise to practice and test beginner web development skills.
 
-##About the game
+## About the game
 Simon is a memory game where the player needs to repeat a sequence of colors that the game generates. Each time the player completes a sequence correctly, the game adds a new color to the sequence. The player's goal is to correctly repeat as many sequences as possible.
 
 ## Technologies used
