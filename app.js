@@ -1,12 +1,26 @@
 const colors = ['yellow', 'green', 'blue', 'red'];
+const statusElement = document.querySelector('.status');
+const scoreElement = document.querySelector('.score span');
 const startButton = document.querySelector('.start');
-const resetButton = document.querySelector('.reset');
+
 let randomColors = [];
 let userClicks = [];
 let score = 0;
 
+function updateStatusMessage(message) {
+    statusElement.innerHTML = message;
+
+    if(message == 'Reproduza'){
+        statusElement.style.backgroundColor = '#a9f1e5';
+    }else if(message == 'Observe'){
+        statusElement.style.backgroundColor = 'aliceblue';
+    }else{
+        statusElement.style.backgroundColor = 'red';
+    }
+};
+
 function startGame() {
-    getRandomColor();
+        getRandomColor();
 };
 
 function getRandomColor() {
@@ -19,6 +33,10 @@ function getRandomColor() {
         let boxElement = getElement(color);
         lightUpBoxElement(boxElement, Number(index) + 1);
     });
+
+    setTimeout(() => {
+        updateStatusMessage('Reproduza');
+    }, randomColors.length * 1400);
 };
 
 function getElement(color) {
@@ -38,6 +56,10 @@ function getElement(color) {
 
 function lightUpBoxElement(boxElement, index) {
     let delay = index * 1200;
+
+    if (index === 1) {
+        updateStatusMessage('Observe');
+    }
 
     setTimeout(function () {
         boxElement.style.opacity = '1';
@@ -69,7 +91,7 @@ function checkOrder() {
         if (userClicks.length == randomColors.length) {
             score++
             setTimeout(function () {
-                alert('São iguais\nPONTUAÇÃO: ' + score + '\n\n\n OBSERVE!!');
+                scoreElement.innerHTML = score;
                 startGame();
             }, 600);
         };
@@ -77,19 +99,18 @@ function checkOrder() {
 };
 
 function endGame() {
-    alert('GAME OVER!!\n\nSeu SCORE: ' + score);
-    resetGame();
+    updateStatusMessage('ERROU\nScore:\n' + score);
 };
 
 function resetGame(){
     score = 0;
+    scoreElement.innerHTML = 0;
     randomColors = [];
     userClicks = [];
-    return;
+    updateStatusMessage('Observe');
 };
 
 startButton.addEventListener('click', startGame);
-resetButton.addEventListener('click', resetGame);
 
 document.querySelectorAll('.block').forEach(function (block) {
     block.addEventListener('click', function (e) {
