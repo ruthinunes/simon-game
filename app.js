@@ -6,21 +6,27 @@ const startButton = document.querySelector('.start');
 let randomColors = [];
 let userClicks = [];
 let score = 0;
+let startNewGame = false;
 
 function updateStatusMessage(message) {
     statusElement.innerHTML = message;
 
-    if(message == 'Reproduza'){
+    if (message == 'Reproduza') {
         statusElement.style.backgroundColor = '#a9f1e5';
-    }else if(message == 'Observe'){
+    } else if (message == 'Observe') {
         statusElement.style.backgroundColor = 'aliceblue';
-    }else{
+    } else {
         statusElement.style.backgroundColor = 'red';
     }
 };
 
 function startGame() {
-        getRandomColor();
+    if (startNewGame) {
+        resetGame();
+        startNewGame = false;
+    };
+    getRandomColor();
+    addBlockEvent();
 };
 
 function getRandomColor() {
@@ -30,7 +36,7 @@ function getRandomColor() {
     userClicks = [];
 
     randomColors.forEach(function (color, index) {
-        let boxElement = getElement(color);
+        let boxElement = getBoxElement(color);
         lightUpBoxElement(boxElement, Number(index) + 1);
     });
 
@@ -39,7 +45,7 @@ function getRandomColor() {
     }, randomColors.length * 1400);
 };
 
-function getElement(color) {
+function getBoxElement(color) {
     switch (color) {
         case 'yellow':
             return document.querySelector('.block-yellow');
@@ -99,10 +105,12 @@ function checkOrder() {
 };
 
 function endGame() {
-    updateStatusMessage('ERROU\nScore:\n' + score);
+    updateStatusMessage('ERROU\nScore: ' + score);
+    removeBlockEvent();
+    startNewGame = true;
 };
 
-function resetGame(){
+function resetGame() {
     score = 0;
     scoreElement.innerHTML = 0;
     randomColors = [];
@@ -110,10 +118,20 @@ function resetGame(){
     updateStatusMessage('Observe');
 };
 
-startButton.addEventListener('click', startGame);
-
-document.querySelectorAll('.block').forEach(function (block) {
-    block.addEventListener('click', function (e) {
-        processClick(e.target)
+function addBlockEvent() {
+    document.querySelectorAll('.block').forEach(function (block) {
+        block.addEventListener('click', handleBlockClick);
     });
-});
+};
+
+function removeBlockEvent() {
+    document.querySelectorAll('.block').forEach(function (block) {
+        block.removeEventListener('click', handleBlockClick);
+    });
+};
+
+function handleBlockClick(e) {
+    processClick(e.target);
+};
+
+startButton.addEventListener('click', startGame);
